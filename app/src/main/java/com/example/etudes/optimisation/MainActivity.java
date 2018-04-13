@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         eAmont.setText("172.2");
 
 
+
         //Qtot
         final NumberPicker npQT = (NumberPicker) findViewById(R.id.numberPickerQtot);
         npQT.setMinValue(0);
@@ -207,6 +208,9 @@ public class MainActivity extends AppCompatActivity {
 
                 int qtot = npQT.getValue()*(range.step);
 
+                double dAmont = Double.parseDouble(eAmont.getText().toString());
+
+
                 if(npmin1.getValue() > npmax1.getValue()){
                     Toasty.error(getApplicationContext(), "Turbine 1: Qmin est superieur à Qmax", Toast.LENGTH_SHORT, true).show();
                     allCorrect = false;
@@ -234,9 +238,20 @@ public class MainActivity extends AppCompatActivity {
                     allCorrect = false;
                 }
 
+
+
+                if(dAmont>173 || dAmont<164){
+
+                    Toasty.error(getApplicationContext(), "L'élévation amont doit être comprise entre 164 et 173 m ", Toast.LENGTH_SHORT,true).show();
+                    allCorrect = false;
+                }
+
+
+
+
                 if(allCorrect){
 
-                    double dAmont = Double.parseDouble(eAmont.getText().toString());
+
 
                     SettingValue.setMAX_FLOW(qtot);
 
@@ -262,7 +277,9 @@ public class MainActivity extends AppCompatActivity {
                     optimum = optimisation.optimise(dAmont,SettingValue.MAX_FLOW);
                     SettingValue.OPTIMUM = optimum;
 
-                    Toasty.success(getApplicationContext(),"Q1"+SettingValue.OPTIMUM[0]+"Q2"+optimum[1]+"Q3"+optimum[2]+"Q4"+optimum[3]+"Q5"+optimum[4], Toast.LENGTH_SHORT, true).show();
+                    //Toasty.success(getApplicationContext(),"Q1"+SettingValue.OPTIMUM[0]+"Q2"+optimum[1]+"Q3"+optimum[2]+"Q4"+optimum[3]+"Q5"+optimum[4], Toast.LENGTH_SHORT, true).show();
+
+                    Toasty.success(getApplicationContext(),"Optimisation en cours", Toast.LENGTH_SHORT, true).show();
 
                     Intent resultIntent = new Intent(getApplicationContext(),ShowActivity.class);
                     startActivity(resultIntent);

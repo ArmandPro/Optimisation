@@ -33,6 +33,10 @@ public final class SettingValue {
 
     public static double PUISSANCE_OPTIMUM[] = new double[5];
 
+    public static double ELEVATION[] = new double[5];
+
+
+
 
 
     public static int getMIN_FLOW() {

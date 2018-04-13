@@ -170,8 +170,16 @@ public class Optimisation {
         if (optimum[0] != -1)
             sn -= optimum[0];
 
+        /////////////////////////////////////////////    PATCH HERE
+
+        if (optimum[0] == 0)
+            sn--;
+
+        /////////////////////////////////////////////    PATCH END
+
         int Index_Min_T2 = SettingValue.MIN_FLOW_T2 / SettingValue.DISCRETISATION;
         int Index_Max_T2 = SettingValue.MAX_FLOW_T2 / SettingValue.DISCRETISATION;
+
         tempOpti = (int) stage2[sn - 1][NB_LINE + 2];
         if ((tempOpti >= Index_Min_T2) && (tempOpti <= Index_Max_T2))
             optimum[1] = tempOpti;
@@ -278,7 +286,14 @@ public class Optimisation {
 
         for (int i = 0; i < 5; i++) {
             int Qi = optimum[i] * SettingValue.DISCRETISATION;
-            SettingValue.PUISSANCE_OPTIMUM[i]=calculatedData.getPower(Qi, i + 1, eAmont);
+            if(Qi != 0){
+                SettingValue.PUISSANCE_OPTIMUM[i]=calculatedData.getPower(Qi, i + 1, eAmont);
+                SettingValue.ELEVATION[i]=calculatedData.getHChute(Qi, i+1, eAmont);
+            }else{
+                SettingValue.PUISSANCE_OPTIMUM[i]=0;
+                SettingValue.ELEVATION[i]=0;
+            }
+
         }
 
         for (int i = 0; i < 5; i++) {

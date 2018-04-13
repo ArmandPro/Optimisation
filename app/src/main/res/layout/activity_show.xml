@@ -22,9 +22,10 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="38sp"
+                android:background="?attr/colorControlHighlight"
 
-                android:text="Turbine 1" />
+                android:text="Turbine 1"
+                android:textSize="38sp" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -43,6 +44,7 @@
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="?attr/colorControlHighlight"
                 android:textSize="38sp"
                 android:text="Turbine 2" />
 
@@ -63,6 +65,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="?attr/colorControlHighlight"
                 android:textSize="38sp"
                 android:text="Turbine 3" />
 
@@ -84,6 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="38sp"
+                android:background="?attr/colorControlHighlight"
                 android:text="Turbine 4" />
             <TextView
                 android:id="@+id/textView9"
@@ -103,6 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="38sp"
+                android:background="?attr/colorControlHighlight"
                 android:text="Turbine 5" />
             <TextView
                 android:id="@+id/textView11"

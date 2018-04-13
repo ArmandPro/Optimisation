@@ -56,6 +56,35 @@ public class CalculatedData {
 
     }
 
+    public double getHChute(int Q, int i,double eAmont) {
+        switch (i) {
+            case 1: {
+                return eAmont - (-7.431 * Math.pow(10, -7) * Math.pow(Q, 2) + 4.185 * Math.pow(10, -3) * Q + 137.1);
+
+            }
+            case 2:{
+
+                return eAmont - (-7.431 * Math.pow(10, -7) * Math.pow(Q, 2) + 4.185 * Math.pow(10, -3) * Q + 137.1);
+
+            }
+            case 3:{
+                return eAmont - (-7.431 * Math.pow(10, -7) * Math.pow(Q, 2) + 4.185 * Math.pow(10, -3) * Q + 137.1);
+
+            }
+            case 4:{
+                return eAmont - (-7.431 * Math.pow(10, -7) * Math.pow(Q, 2) + 4.185 * Math.pow(10, -3) * Q + 137.1);
+
+            }
+            case 5:{
+                return eAmont - (-7.431 * Math.pow(10, -7) * Math.pow(Q, 2) + 4.185 * Math.pow(10, -3) * Q + 137.1);
+
+            }
+            default:break;
+        }
+        return 0;
+
+    }
+
     public void updatePower(double eAmont) {
         // Turbine 1
         double Q1 = SettingValue.MIN_FLOW; // OR MIN_FLOW_T1 ????????
