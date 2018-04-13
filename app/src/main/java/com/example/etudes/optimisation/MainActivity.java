@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         npQT.setMinValue(0);
         npQT.setMaxValue((5*range.max-range.min)/range.step);
         npQT.setDisplayedValues(myBigValues);
-        npQT.setValue(170);
+        npQT.setValue(170); //170*5
         npQT.setWrapSelectorWheel(true);
 
         //Turbine 1
@@ -148,20 +148,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-        //TEST ONLY
-        npmin1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal){
-                //Display the newly selected number from picker
-                //tv.setText("Selected Number : " + newVal);
-            }
-        });
-
-
-
         //OPTIMISE BUTTON
         Button button = (Button) findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
                 boolean allCorrect = true;
 
+                //getting all values
                 int qmin1 = npmin1.getValue()*(range.step);
                 int qmax1 = npmax1.getValue()*(range.step);
                 if(!s1.isChecked()){
@@ -211,38 +198,45 @@ public class MainActivity extends AppCompatActivity {
                 double dAmont = Double.parseDouble(eAmont.getText().toString());
 
 
+                //checking coherence between values
+
                 if(npmin1.getValue() > npmax1.getValue()){
                     Toasty.error(getApplicationContext(), "Turbine 1: Qmin est superieur à Qmax", Toast.LENGTH_SHORT, true).show();
+                    npmin1.setBackgroundColor(Color.RED);
                     allCorrect = false;
                 }
                 if(npmin2.getValue() > npmax2.getValue()){
                     Toasty.error(getApplicationContext(), "Turbine 2: Qmin est superieur à Qmax", Toast.LENGTH_SHORT,true).show();
+                    npmin2.setBackgroundColor(Color.RED);
                     allCorrect = false;
                 }
                 if(npmin3.getValue() > npmax3.getValue()){
                     Toasty.error(getApplicationContext(), "Turbine 3: Qmin est superieur à Qmax", Toast.LENGTH_SHORT,true).show();
+                    npmin3.setBackgroundColor(Color.RED);
                     allCorrect = false;
                 }
                 if(npmin4.getValue() > npmax4.getValue()){
                     Toasty.error(getApplicationContext(), "Turbine 4: Qmin est superieur à Qmax", Toast.LENGTH_SHORT,true).show();
+                    npmin4.setBackgroundColor(Color.RED);
                     allCorrect = false;
                 }
                 if(npmin5.getValue() > npmax5.getValue()){
                     Toasty.error(getApplicationContext(), "Turbine 5: Qmin est superieur à Qmax", Toast.LENGTH_SHORT,true).show();
+                    npmin5.setBackgroundColor(Color.RED);
                     allCorrect = false;
                 }
 
                 if((qmin1+qmin2+qmin3+qmin4+qmin5)>qtot){
 
                     Toasty.error(getApplicationContext(), "Qtot est trop faible, devrait etre superieur à: " + (qmin1+qmin2+qmin3+qmin4+qmin5) +"m3/s", Toast.LENGTH_SHORT,true).show();
+                    npQT.setBackgroundColor(Color.RED);
                     allCorrect = false;
                 }
-
-
 
                 if(dAmont>173 || dAmont<164){
 
                     Toasty.error(getApplicationContext(), "L'élévation amont doit être comprise entre 164 et 173 m ", Toast.LENGTH_SHORT,true).show();
+                    eAmont.setBackgroundColor(Color.RED);
                     allCorrect = false;
                 }
 
@@ -252,10 +246,19 @@ public class MainActivity extends AppCompatActivity {
                 if(allCorrect){
 
 
+                    //reset RED alert
+                    npmin1.setBackgroundColor(Color.TRANSPARENT);
+                    npmin2.setBackgroundColor(Color.TRANSPARENT);
+                    npmin3.setBackgroundColor(Color.TRANSPARENT);
+                    npmin4.setBackgroundColor(Color.TRANSPARENT);
+                    npmin5.setBackgroundColor(Color.TRANSPARENT);
+                    npQT.setBackgroundColor(Color.TRANSPARENT);
+                    eAmont.setBackgroundColor(Color.TRANSPARENT);
+
 
                     SettingValue.setMAX_FLOW(qtot);
 
-                    Toasty.info(getApplicationContext(),"qtot: "+qtot);
+                    //Toasty.info(getApplicationContext(),"qtot: "+qtot);
 
                     SettingValue.setMIN_FLOW_T1(qmin1);
                     SettingValue.setMAX_FLOW_T1(qmax1);
@@ -284,10 +287,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent resultIntent = new Intent(getApplicationContext(),ShowActivity.class);
                     startActivity(resultIntent);
 
-
-
                 }
-
 
             }
         });
